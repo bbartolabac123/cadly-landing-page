@@ -18,6 +18,8 @@
     return;
   }
 
+  // threshold: 0 so tall blocks (e.g. legal pages) still reveal when any
+  // part enters the viewport — a fractional threshold can never be met.
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
@@ -26,7 +28,7 @@
         observer.unobserve(entry.target);
       });
     },
-    { rootMargin: "0px 0px -8% 0px", threshold: 0.15 }
+    { rootMargin: "0px 0px -40px 0px", threshold: 0 }
   );
 
   revealEls.forEach((el) => observer.observe(el));

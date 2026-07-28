@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Support — Cadly</title>
+  <meta name="description" content="Get help with Cadly. Reach out if something isn’t working or you have a question about your routines." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Epilogue:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="page-glow" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <a class="logo" href="index.html" aria-label="Cadly home">Cadly</a>
+    <nav class="nav" aria-label="Primary">
+      <a href="index.html#adapt">Features</a>
+      <a href="index.html#for-you">For you</a>
+      <a href="index.html#pro">Pro</a>
+    </nav>
+    <a class="btn btn-small" href="index.html#download">Get Cadly</a>
+  </header>
+
+  <main class="page-main">
+    <div class="page-hero reveal">
+      <p class="section-kicker">Support</p>
+      <h1>Need help?</h1>
+      <p class="lede">
+        We’re here to help you get the most out of your routines. If something isn’t working or you have a question, reach out.
+      </p>
+      <div class="support-actions">
+        <a
+          class="btn"
+          href="mailto:benjaminbartolabac@proton.me?subject=Support%20Request&body=Hi%20Team,%0A%0AI%20need%20help%20with...%0A%0A-------------------------%0AApp%20Version:%0ABuild:%0ADevice:%0AiOS%20Version:%0A%0ADescription:%0A"
+        >
+          Email support
+        </a>
+      </div>
+    </div>
+
+    <div class="page-content">
+      <section class="reveal" aria-labelledby="include-heading">
+        <p class="section-kicker">Before you write</p>
+        <h2 id="include-heading">What to include</h2>
+        <ul class="include-list">
+          <li>Describe the issue you’re experiencing</li>
+          <li>Attach screenshots if possible</li>
+          <li>Tell us how to reproduce the issue</li>
+          <li>We’ll usually reply within 24–48 hours</li>
+        </ul>
+      </section>
+
+      <section class="reveal" aria-labelledby="info-heading">
+        <p class="section-kicker">Diagnostics</p>
+        <h2 id="info-heading">App information</h2>
+        <dl class="info-list">
+          <div class="info-row">
+            <dt>App version</dt>
+            <dd id="version">1.0.0</dd>
+          </div>
+          <div class="info-row">
+            <dt>Platform</dt>
+            <dd id="platform">—</dd>
+          </div>
+        </dl>
+        <button class="btn btn-ghost support-copy" type="button" id="copy-diagnostics">
+          Copy diagnostic information
+        </button>
+        <p class="copy-note" id="copy-note" role="status" aria-live="polite"></p>
+      </section>
+
+      <div class="page-meta reveal">
+        <p>Thanks for using Cadly. Every report helps us improve.</p>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <nav class="footer-nav" aria-label="Legal">
+      <a href="support.html">Support</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+    </nav>
+    <p>© <span id="year"></span> Cadly. Privacy-first. Designed for iPhone.</p>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    (() => {
+      const platform = document.getElementById("platform");
+      if (platform) {
+        platform.textContent = navigator.platform || "Unknown";
+      }
+
+      const copyBtn = document.getElementById("copy-diagnostics");
+      const note = document.getElementById("copy-note");
+      if (!copyBtn) return;
+
+      copyBtn.addEventListener("click", async () => {
+        const version = document.getElementById("version")?.textContent ?? "1.0.0";
+        const diagnostics = [
+          `App Version: ${version}`,
+          `Platform: ${navigator.platform || "Unknown"}`,
+          `Browser: ${navigator.userAgent}`,
+        ].join("\n");
+
+        try {
+          await navigator.clipboard.writeText(diagnostics);
+          if (note) note.textContent = "Diagnostic information copied.";
+        } catch {
+          if (note) note.textContent = "Couldn’t copy — please copy the details manually.";
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
